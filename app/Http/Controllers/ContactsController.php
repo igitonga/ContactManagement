@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Models\Contact;
 use App\Models\Group;
 use DB;
@@ -32,21 +33,22 @@ class ContactsController extends Controller
         }
     }
 
-    public function edit(Request $request, $id){
+    public function edit(Request $request){
         try{
             DB::beginTransaction();
 
-            $contact = Contact::find($id);
+            $contact = Contact::find($request->id);
             $contact->first_name = $request->firstName;
             $contact->last_name = $request->lastName;
             $contact->phone_number = $request->phoneNumber;
             $contact->email = $request->email;
+            $contact->group_id = $request->group;
             $contact->save();
 
             DB::commit();
             toastr()->success('Contact has been edited');
 
-            return \redirect()->back();
+            return \redirect('/');
         }
         catch(Exception $e){
             toastr()->error($e->getMessage());
@@ -84,7 +86,8 @@ class ContactsController extends Controller
 
     public function view($id){
         $details = Contact::find($id);
+        $groups = Group::latest()->get();
 
-        return view('welcome', compact('details'));
+        return view('edit_contact', compact('details','groups'));
     }
 }

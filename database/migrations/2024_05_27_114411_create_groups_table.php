@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('contacts_count')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

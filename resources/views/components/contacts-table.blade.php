@@ -1,3 +1,4 @@
+
 @props(['contacts'])
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-12 mt-5">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -50,7 +51,7 @@
                         {{ date('d-m-Y', strtotime($contact->created_at)) }}
                     </td>
                     <td class="flex justify-between px-6 py-4 text-right">
-                        <a href="#" data-modal-target="edit-contact-modal" data-modal-toggle="edit-contact-modal"
+                        <a  href="{{ url('details/'.$contact->id) }}"
                             class="font-medium text-green-600 dark:text-blue-500 hover:underline">Edit</a>
                         <a href="{{ url('delete/' . $contact->id) }}"
                             class="font-medium text-red-600 dark:text-blue-500 hover:underline">Delete</a>
