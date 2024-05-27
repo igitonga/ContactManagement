@@ -27,18 +27,18 @@ class GroupController extends Controller
         }
     }
 
-    public function edit(Request $request, $id){
+    public function edit(Request $request){
         try{
             DB::beginTransaction();
 
-            $group = Group::find($id);
+            $group = Group::find($request->id);
             $group->name = $request->name;
             $group->save();
 
             DB::commit();
             toastr()->success('Group has been edited');
 
-            return \redirect()->back();
+            return \redirect('/');
         }
         catch(Exception $e){
             toastr()->error($e->getMessage());
@@ -65,5 +65,11 @@ class GroupController extends Controller
         $groups = Group::latest()->get();
 
         return view('welcome', compact('groups'));
+    }
+
+    public function view($id){
+        $details = Group::find($id);
+
+        return view('edit_group', compact('details'));
     }
 }

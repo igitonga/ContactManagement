@@ -15,7 +15,7 @@
             <span class="sr-only">Close modal</span>
         </button>
     </div>
-    <form class="p-4" method="POST" action="{{ route('contact.group') }}">
+    <form class="p-4" method="POST" action="{{ route('create.group') }}">
         @csrf
         <div class="grid gap-6 mb-6 md:grid-cols-2">
             <div>

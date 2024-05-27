@@ -24,5 +24,7 @@ Route::post('/edit/contact', [ContactsController::class, 'edit'])->name('contact
 Route::get('/details/{id}', [ContactsController::class, 'view']);
 Route::get('/delete/{id}', [ContactsController::class, 'delete']);
 
-Route::post('/create/group', [GroupController::class, 'create'])->name('contact.group');
+Route::post('/create/group', [GroupController::class, 'create'])->name('create.group');
+Route::post('/edit/group', [GroupController::class, 'edit'])->name('edit.group');
 Route::get('/group/delete/{id}', [GroupController::class, 'delete']);
+Route::get('/group/details/{id}', [GroupController::class, 'view']);

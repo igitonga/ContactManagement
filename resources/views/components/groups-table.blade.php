@@ -33,7 +33,7 @@
                         {{ date('d-m-Y', strtotime($group->created_at)) }}
                     </td>
                     <td class="flex justify-between px-6 py-4 text-right">
-                        <a href="#" data-modal-target="edit-group-modal" data-modal-toggle="edit-group-modal"
+                        <a href="{{ url('group/details/' . $group->id) }}"
                             class="font-medium text-green-600 dark:text-blue-500 hover:underline">Edit</a>
                         <a href="{{ url('group/delete/' . $group->id) }}"
                             class="font-medium text-red-600 dark:text-blue-500 hover:underline">Delete</a>
