@@ -61,12 +61,6 @@ class GroupController extends Controller
         }
     }
 
-    public function getAll(){
-        $groups = Group::latest()->get();
-
-        return view('welcome', compact('groups'));
-    }
-
     public function view($id){
         $details = Group::find($id);
 

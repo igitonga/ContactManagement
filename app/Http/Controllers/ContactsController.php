@@ -94,19 +94,17 @@ class ContactsController extends Controller
 
     public function view($id){
         $details = Contact::find($id);
-        $groups = Group::latest()->get();
 
-        return view('edit_contact', compact('details','groups'));
+        return view('edit_contact', compact('details'));
     }
 
     public function search(Request $request) {
         $searchInput = $request->searchInput;
-        $groups = Group::latest()->get();
     
         $contacts = Contact::where('first_name', 'LIKE', '%' . $searchInput . '%')
                         ->orWhere('last_name', 'LIKE', '%' . $searchInput . '%')
                         ->orWhere('email', 'LIKE', '%' . $searchInput . '%')
                         ->orWhere('phone_number', 'LIKE', '%' . $searchInput . '%')->get();
-        return view('welcome', compact('contacts','groups'))->re;
+        return view('welcome', compact('contacts'));
     }
 }
