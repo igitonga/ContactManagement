@@ -15,7 +15,8 @@
 <body>
     <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 lg:px-8">
         <div class="flex justify-between px-12 py-3 shadow-md">
-            <form class="w-80">
+            <form class="w-80" method="POST" action="{{ route('search') }}">
+                @csrf
                 <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">

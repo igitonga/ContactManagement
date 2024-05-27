@@ -20,11 +20,15 @@ class ContactsController extends Controller
             $contact->phone_number = $request->phoneNumber;
             $contact->email = $request->email;
             $contact->group_id = $request->group;
-            $contact->save();
 
-            DB::commit();
-            toastr()->success('Contact has been added');
+            if($contact->save()){
+                DB::commit();
+                toastr()->success('Contact has been added');
+    
+                return \redirect()->back();
+            }
 
+            toastr()->error("Something went wrong");
             return \redirect()->back();
         }
         catch(Exception $e){
@@ -43,11 +47,15 @@ class ContactsController extends Controller
             $contact->phone_number = $request->phoneNumber;
             $contact->email = $request->email;
             $contact->group_id = $request->group;
-            $contact->save();
 
-            DB::commit();
-            toastr()->success('Contact has been edited');
+            if($contact->save()){
+                DB::commit();
+                toastr()->success('Contact has been edited');
+    
+                return \redirect('/');
+            }
 
+            toastr()->error("Something went wrong");
             return \redirect('/');
         }
         catch(Exception $e){
@@ -89,5 +97,16 @@ class ContactsController extends Controller
         $groups = Group::latest()->get();
 
         return view('edit_contact', compact('details','groups'));
+    }
+
+    public function search(Request $request) {
+        $searchInput = $request->searchInput;
+        $groups = Group::latest()->get();
+    
+        $contacts = Contact::where('first_name', 'LIKE', '%' . $searchInput . '%')
+                        ->orWhere('last_name', 'LIKE', '%' . $searchInput . '%')
+                        ->orWhere('email', 'LIKE', '%' . $searchInput . '%')
+                        ->orWhere('phone_number', 'LIKE', '%' . $searchInput . '%')->get();
+        return view('welcome', compact('contacts','groups'))->re;
     }
 }
