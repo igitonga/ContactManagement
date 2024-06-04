@@ -20,8 +20,6 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->enum('status',['active','inactive','blocked'])->default('active');
             $table->timestamps();
-
-            $table->foreign('group_id')->references('id')->on('groups');
         });
     }
 
